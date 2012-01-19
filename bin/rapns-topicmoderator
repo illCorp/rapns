@@ -25,6 +25,6 @@ load 'config/environment.rb'
 
 require 'rapns/patches'
 
-Rapns::Daemon.start(environment, foreground, 'rapns-meeps-iphone.yml')
-#Rapns::Daemon.start(environment, foreground, 'rapns-topic-moderator.yml')
+# Rapns::Daemon.start(environment, false, 'rapns-meeps-iphone.yml')
+Rapns::Daemon.start(environment, foreground, 'rapns-topic-moderator.yml')
 
