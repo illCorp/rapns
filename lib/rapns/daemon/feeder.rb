@@ -8,9 +8,9 @@ module Rapns
         "Feeder"
       end
 
-      def self.start(foreground)
+      def self.start(foreground, apn_application_target)
         reconnect_database unless foreground
-
+        @apn_application_target = apn_application_target
         loop do
           break if @stop
           enqueue_notifications
@@ -30,7 +30,9 @@ module Rapns
           with_database_reconnect_and_retry do
             if Rapns::Daemon.delivery_queue.notifications_processed?
               Rapns::Notification.ready_for_delivery.each do |notification|
-                Rapns::Daemon.delivery_queue.push(notification)
+                if (notification.apn_application_target==@apn_application_target)
+                  Rapns::Daemon.delivery_queue.push(notification)
+                end
               end
             end
           end

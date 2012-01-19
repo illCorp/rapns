@@ -7,6 +7,7 @@ module Rapns
     class Configuration
       attr_accessor :push, :feedback
       attr_accessor :certificate, :certificate_password, :airbrake_notify, :pid_file
+      attr_accessor :apn_application_target
       alias_method  :airbrake_notify?, :airbrake_notify
 
       def initialize(environment, config_path)
@@ -34,6 +35,7 @@ module Rapns
         set_variable(nil, :airbrake_notify, config, :optional => true, :default => true)
         set_variable(nil, :certificate_password, config, :optional => true, :default => "")
         set_variable(nil, :pid_file, config, :optional => true, :default => "")
+        set_variable(nil, :apn_application_target, config)
       end
 
       def certificate

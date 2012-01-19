@@ -13,6 +13,7 @@ class CreateRapnsNotifications < ActiveRecord::Migration
       t.timestamp :failed_at,             :null => true
       t.integer   :error_code,            :null => true
       t.string    :error_description,     :null => true
+      t.string    :apn_application_target
       t.timestamp :deliver_after,         :null => true
       t.timestamps
     end

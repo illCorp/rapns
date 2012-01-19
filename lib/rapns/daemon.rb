@@ -25,11 +25,11 @@ module Rapns
       alias_method  :foreground?, :foreground
     end
 
-    def self.start(environment, foreground)
+    def self.start(environment, foreground, config_name)
       @foreground = foreground
       setup_signal_hooks
 
-      self.configuration = Configuration.new(environment, File.join(Rails.root, 'config', 'rapns', 'rapns.yml'))
+      self.configuration = Configuration.new(environment, File.join(Rails.root, 'config', 'rapns', config_name))
       configuration.load
 
       self.logger = Logger.new(:foreground => foreground, :airbrake_notify => configuration.airbrake_notify)
@@ -49,7 +49,7 @@ module Rapns
       logger.info('Ready')
 
       FeedbackReceiver.start
-      Feeder.start(foreground?)
+      Feeder.start(foreground?, self.configuration.apn_application_target )
     end
 
     protected
