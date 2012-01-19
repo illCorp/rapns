@@ -32,7 +32,7 @@ module Rapns
       self.configuration = Configuration.new(environment, File.join(Rails.root, 'config', 'rapns', config_name))
       configuration.load
 
-      self.logger = Logger.new(:foreground => foreground, :airbrake_notify => configuration.airbrake_notify)
+      self.logger = Logger.new(:foreground => foreground, :airbrake_notify => configuration.airbrake_notify, :log_file => configuration.log_file)
 
       self.certificate = Certificate.new(configuration.certificate)
       certificate.load
