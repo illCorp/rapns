@@ -3,7 +3,7 @@ module Rapns
     class Logger
       def initialize(options)
         @options = options
-        log_path = File.join(Rails.root, 'log', 'rapns.log')
+        log_path = File.join(Rails.root, 'log', options[:log_file])
         @logger = ActiveSupport::BufferedLogger.new(log_path, Rails.logger.level)
         @logger.auto_flushing = Rails.logger.respond_to?(:auto_flushing) ? Rails.logger.auto_flushing : true
       end
